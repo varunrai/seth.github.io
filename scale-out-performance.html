@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FSx ONTAP: Ultimate Performance Scale-Out Architecture | AWS FSxN</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Achieve ultimate performance with FSx ONTAP scale-out architecture. Scale to 12 HA pairs, 72 GB/s throughput, and millions of IOPS. Enterprise-grade performance without compromise.">
+    <meta name="keywords" content="FSx ONTAP performance, scale-out architecture, high throughput storage, ONTAP HA pairs, AWS storage performance, NVMe performance, enterprise storage scaling">
+    <meta name="author" content="AWS FSxN">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aws-fsxn.github.io/scale-out-performance.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aws-fsxn.github.io/scale-out-performance.html">
+    <meta property="og:title" content="FSx ONTAP: Ultimate Performance Scale-Out Architecture">
+    <meta property="og:description" content="Achieve ultimate performance with FSx ONTAP scale-out. Scale to 12 HA pairs, 72 GB/s throughput, and millions of IOPS.">
+    <meta property="og:site_name" content="AWS FSxN">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://aws-fsxn.github.io/scale-out-performance.html">
+    <meta name="twitter:title" content="FSx ONTAP: Ultimate Performance Scale-Out Architecture">
+    <meta name="twitter:description" content="Scale to 12 HA pairs, 72 GB/s throughput, millions of IOPS. Enterprise-grade performance without compromise.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "FSx ONTAP: Ultimate Performance Scale-Out Architecture",
+        "description": "Achieve ultimate performance with FSx ONTAP scale-out architecture. Scale to 12 HA pairs, 72 GB/s throughput, and millions of IOPS. Enterprise-grade performance without compromise.",
+        "author": {
+            "@type": "Organization",
+            "name": "AWS FSxN"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AWS FSxN"
+        },
+        "datePublished": "2026-01-16",
+        "dateModified": "2026-01-16",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://aws-fsxn.github.io/scale-out-performance.html"
+        },
+        "about": [
+            {
+                "@type": "Thing",
+                "name": "Storage Performance"
+            },
+            {
+                "@type": "Thing",
+                "name": "Scale-Out Architecture"
+            },
+            {
+                "@type": "Thing",
+                "name": "High-Performance Computing"
+            }
+        ],
+        "keywords": "FSx ONTAP performance, scale-out architecture, high throughput storage, enterprise storage scaling"
+    }
+    </script>
+    <style>
+        /* Palette: Cyber Performance Blue & Neon Amber */
+        :root {
+            --primary: #06091F; /* Dark Space */
+            --secondary: #3B82F6; /* Performance Blue */
+            --accent: #F59E0B; /* Power Amber */
+            --glow: #60A5FA;
+            --bg-canvas: #F1F5F9;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-canvas);
+            color: #1E293B;
+            scroll-behavior: smooth;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .performance-gradient {
+            background: linear-gradient(135deg, #06091F 0%, #1E3A8A 100%);
+        }
+
+        .stat-value {
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to bottom, #fff, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .node-pair {
+            @apply flex flex-col items-center p-3 rounded-lg border-2 border-dashed border-blue-200 bg-blue-50/50;
+        }
+
+        .cluster-link {
+            @apply flex-1 h-1 bg-blue-400/30 relative;
+        }
+    </style>
+    
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="max-w-6xl mx-auto rounded-3xl performance-gradient p-10 md:p-16 text-white mb-12 shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-3xl rounded-full -mr-20 -mt-20"></div>
+        <div class="relative z-10">
+            <div class="inline-block px-4 py-1 mb-6 text-xs font-bold tracking-widest text-blue-200 border border-blue-400/30 rounded-full uppercase">
+                Scale-out Performance Release
+            </div>
+            <h1 class="text-4xl md:text-7xl font-black mb-6 leading-none">
+                The Speed of <br><span class="text-blue-400">Scale-out</span>
+            </h1>
+            <p class="text-xl text-blue-100 max-w-2xl leading-relaxed opacity-90">
+                Amazon FSx for NetApp ONTAP now unlocks <strong>36 GB/s throughput</strong> and <strong>1.2 Million IOPS</strong>. Discover how multiple HA pairs unify into the cloud's most powerful data engine.
+            </p>
+            <div class="flex flex-wrap gap-8 mt-10">
+                <div>
+                    <div class="text-4xl stat-value">36 GB/s</div>
+                    <div class="text-xs uppercase text-blue-300 font-bold">Max Throughput</div>
+                </div>
+                <div class="w-px h-12 bg-blue-700/50 hidden md:block"></div>
+                <div>
+                    <div class="text-4xl stat-value">1.2M</div>
+                    <div class="text-xs uppercase text-blue-300 font-bold">Max IOPS</div>
+                </div>
+                <div class="w-px h-12 bg-blue-700/50 hidden md:block"></div>
+                <div>
+                    <div class="text-4xl stat-value">216 TB</div>
+                    <div class="text-xs uppercase text-blue-300 font-bold">NVMe Read Cache</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto">
+
+        <!-- SECTION 1: THE PERFORMANCE LEAP -->
+        <section class="mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-6 text-center">Throughput Scaling: Single vs. Multi-Node</h3>
+                    <div class="chart-container">
+                        <canvas id="throughputChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-[10px] text-slate-400 text-center italic">Comparison based on standard 1-node vs. 12-node scale-out configurations.</p>
+                </div>
+                <div class="space-y-6">
+                    <h2 class="text-3xl font-black text-slate-900">1. Breaking the Performance Ceiling</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        Legacy cloud file systems are often limited by the performance of a single pair of file servers. FSx for NetApp ONTAP enables **Scale-out Architecture**, allowing you to aggregate the performance of up to 12 high-availability pairs into a single, unified file system.
+                    </p>
+                    <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-600">
+                        <h4 class="font-bold text-blue-900 mb-2">Linear Scalability</h4>
+                        <p class="text-sm text-blue-800">
+                            As you add more nodes, both throughput and IOPS scale linearly. This allows your storage to grow exactly in line with the demands of your most compute-intensive workloads.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ARCHITECTURE DIAGRAM (CSS) -->
+        <section class="mb-16">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-black text-slate-900">2. Unified Scale-out Cluster</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto mt-2">Multiple High-Availability (HA) pairs act as a single logical entity, distributing data blocks across all nodes for maximum parallel performance.</p>
+            </div>
+
+            <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                    <!-- Client Layer -->
+                    <div class="flex flex-col gap-3 w-full md:w-48">
+                        <div class="p-3 bg-slate-100 rounded-lg text-center border border-slate-200">
+                            <span class="text-xs font-bold uppercase text-slate-500">Compute Farm</span>
+                            <p class="text-[10px]">1000s of EC2 Instances</p>
+                        </div>
+                    </div>
+
+                    <!-- Connectors -->
+                    <div class="hidden md:block flex-1 h-0.5 bg-slate-200 relative">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-[9px] font-bold text-blue-500 uppercase">Parallel Mounting</div>
+                    </div>
+                    <div class="md:hidden text-2xl text-slate-200">↓</div>
+
+                    <!-- Cluster Layer -->
+                    <div class="flex flex-wrap justify-center gap-4 flex-[2]">
+                        <!-- HA Pair 1 -->
+                        <div class="node-pair">
+                            <div class="flex gap-1 mb-1">
+                                <div class="w-3 h-3 bg-blue-600 rounded-sm"></div>
+                                <div class="w-3 h-3 bg-blue-400 rounded-sm"></div>
+                            </div>
+                            <span class="text-[9px] font-black uppercase">HA Pair 1</span>
+                        </div>
+                        <!-- HA Pair 2 -->
+                        <div class="node-pair">
+                            <div class="flex gap-1 mb-1">
+                                <div class="w-3 h-3 bg-blue-600 rounded-sm"></div>
+                                <div class="w-3 h-3 bg-blue-400 rounded-sm"></div>
+                            </div>
+                            <span class="text-[9px] font-black uppercase">HA Pair 2</span>
+                        </div>
+                        <!-- HA Pair 3 -->
+                        <div class="node-pair border-blue-400 bg-blue-100">
+                            <div class="flex gap-1 mb-1">
+                                <div class="w-3 h-3 bg-blue-600 rounded-sm"></div>
+                                <div class="w-3 h-3 bg-blue-400 rounded-sm"></div>
+                            </div>
+                            <span class="text-[9px] font-black uppercase">HA Pair 3</span>
+                        </div>
+                        <!-- ... More pairs -->
+                        <div class="node-pair border-slate-200 bg-slate-50 opacity-50">
+                            <div class="text-[9px] font-black uppercase">Up to 12 Pairs</div>
+                        </div>
+                    </div>
+
+                    <!-- Connectors -->
+                    <div class="hidden md:block flex-1 h-0.5 bg-slate-200 relative">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-[9px] font-bold text-emerald-500 uppercase">Single Namespace</div>
+                    </div>
+                    <div class="md:hidden text-2xl text-slate-200">↓</div>
+
+                    <!-- Storage Layer -->
+                    <div class="w-full md:w-48 p-4 bg-emerald-950 rounded-xl text-white text-center shadow-lg">
+                        <div class="text-xl mb-1">🗄️</div>
+                        <h4 class="font-bold text-xs uppercase">Unified Data Lake</h4>
+                        <p class="text-[8px] opacity-60">FlexGroup Volumes</p>
+                    </div>
+                </div>
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-4 bg-slate-50 rounded-xl">
+                        <h5 class="font-bold text-xs text-blue-700 mb-1">FlexGroup Volumes</h5>
+                        <p class="text-[10px] text-slate-500">Automatically stripes data across all HA pairs to balance load and maximize throughput.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl">
+                        <h5 class="font-bold text-xs text-blue-700 mb-1">NVMe Acceleration</h5>
+                        <p class="text-[10px] text-slate-500">Each node includes local NVMe SSDs for ultra-fast read caching of hot data.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl">
+                        <h5 class="font-bold text-xs text-blue-700 mb-1">Elastic Capacity</h5>
+                        <p class="text-[10px] text-slate-500">Scale performance independent of capacity storage using intelligent tiering.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: LATENCY & RADAR -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-black text-slate-900 mb-8 text-center">3. Built for the Extremes</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Latency Consistency -->
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-6 text-center">Consistent Sub-ms Latency</h3>
+                    <div class="chart-container">
+                        <canvas id="latencyChart"></canvas>
+                    </div>
+                    <div class="mt-6 p-4 bg-slate-50 rounded-xl">
+                        <p class="text-xs text-slate-600 italic">
+                            "The scale-out architecture allows for high throughput without the typical latency spikes seen in standard NAS systems under heavy load."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Suitability Radar -->
+                <div class="card flex flex-col justify-center">
+                    <h3 class="text-xl font-bold mb-6 text-center">Workload Suitability Index</h3>
+                    <div class="chart-container">
+                        <canvas id="workloadRadar"></canvas>
+                    </div>
+                    <p class="text-[10px] text-slate-400 text-center mt-2 italic">Scale-out architectures excel at multi-tenant, high-concurrency environments.</p>
+                </div>
+            </div>
+
+            <!-- Expanded Workload Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-3xl mb-3">🧠</div>
+                    <h4 class="font-bold text-slate-800">Gen AI Training</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Massive parallel read throughput for feeding data-hungry model training clusters via S3 or NFS.</p>
+                </div>
+                <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-3xl mb-3">📈</div>
+                    <h4 class="font-bold text-slate-800">Financial Analytics</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Sub-millisecond latency for real-time quantitative modeling, backtesting, and high-frequency risk analysis.</p>
+                </div>
+                <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-3xl mb-3">🔬</div>
+                    <h4 class="font-bold text-slate-800">EDA & Chip Design</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Supports millions of small metadata operations and high concurrency for silicon simulation workloads.</p>
+                </div>
+                <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-3xl mb-3">🎬</div>
+                    <h4 class="font-bold text-slate-800">Media Rendering</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Provides the massive bandwidth required for multi-stream 4K/8K video editing and VFX render farms.</p>
+                </div>
+                <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-3xl mb-3">🌊</div>
+                    <h4 class="font-bold text-slate-800">Seismic & Geophysics</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Handles the petabyte-scale parallel processing needed for oil and gas exploration data sets.</p>
+                </div>
+                <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-3xl mb-3">🧬</div>
+                    <h4 class="font-bold text-slate-800">Life Sciences</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Enables rapid analysis of large-scale genomic sequences with high concurrent user access.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-6xl mx-auto py-16 text-center border-t border-slate-200">
+        <h2 class="text-3xl font-black text-slate-900 mb-4">Unleash Your Most Ambitious Workloads</h2>
+        <p class="text-slate-500 max-w-2xl mx-auto mb-10 text-lg">
+            Stop architecting around storage bottlenecks. Transition to the cloud's most sophisticated and performant data management platform.
+        </p>
+    </footer>
+
+    <script>
+        // --- LABEL WRAPPING LOGIC (16 Chars) ---
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = "";
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + " ";
+                } else {
+                    currentLine += word + " ";
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        // --- COMMON TOOLTIP CONFIG ---
+        const commonTooltip = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    return Array.isArray(label) ? label.join(' ') : label;
+                }
+            }
+        };
+
+        // --- CHART 1: THROUGHPUT SCALING ---
+        const tpCtx = document.getElementById('throughputChart').getContext('2d');
+        new Chart(tpCtx, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabel('Single HA Pair (Standard)'), wrapLabel('12-Pair Scale-Out Cluster')],
+                datasets: [{
+                    label: 'Max Throughput (GB/s)',
+                    data: [4, 36],
+                    backgroundColor: ['#94A3B8', '#3B82F6'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltip
+                },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'GB per Second' } }
+                }
+            }
+        });
+
+        // --- CHART 2: LATENCY CONSISTENCY ---
+        const ltCtx = document.getElementById('latencyChart').getContext('2d');
+        new Chart(ltCtx, {
+            type: 'line',
+            data: {
+                labels: ['10%', '30%', '50%', '70%', '90%', '95%', '99%'],
+                datasets: [{
+                    label: 'Latency (ms)',
+                    data: [0.4, 0.45, 0.5, 0.55, 0.65, 0.75, 0.95],
+                    borderColor: '#F59E0B',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#F59E0B'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    tooltip: commonTooltip,
+                    title: { display: true, text: 'Latency vs. Load Profile' }
+                },
+                scales: {
+                    y: { min: 0, max: 1.5, title: { display: true, text: 'Milliseconds (ms)' } },
+                    x: { title: { display: true, text: 'System Load Percentile' } }
+                }
+            }
+        });
+
+        // --- CHART 3: WORKLOAD RADAR ---
+        const wlCtx = document.getElementById('workloadRadar').getContext('2d');
+        new Chart(wlCtx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    wrapLabel('Electronic Design Automation'),
+                    wrapLabel('Financial Analytics'),
+                    wrapLabel('Media & Entertainment'),
+                    wrapLabel('High Perf Computing (HPC)'),
+                    wrapLabel('Gen AI Training')
+                ],
+                datasets: [{
+                    label: 'Suitability Index',
+                    data: [10, 10, 10, 10, 10],
+                    borderColor: '#3B82F6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    pointBackgroundColor: '#3B82F6'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    tooltip: commonTooltip,
+                    legend: { display: false }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#E2E8F0' },
+                        grid: { color: '#E2E8F0' },
+                        pointLabels: { font: { size: 10, weight: 'bold' } },
+                        ticks: { display: false, max: 10 }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
