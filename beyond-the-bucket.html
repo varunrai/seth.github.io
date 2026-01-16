@@ -28,6 +28,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -93,6 +96,18 @@
             max-height: 400px;
         }
 
+        /* Navigation offset for main content */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 288px;
+            }
+        }
+
         .card {
             background: white;
             border-radius: 1rem;
@@ -146,6 +161,10 @@
 </head>
 <body class="p-4 md:p-8">
 
+    <!-- Load Navigation -->
+    <script src="navigation.js"></script>
+
+    <div class="main-content">
     <header class="max-w-6xl mx-auto text-center py-12">
         <div class="inline-block px-4 py-1 mb-4 text-xs font-bold tracking-widest text-blue-700 bg-blue-100 rounded-full uppercase">
             Technical Architecture Series
@@ -553,5 +572,6 @@
             }
         });
     </script>
+    </div>
 </body>
 </html>
