@@ -8,7 +8,7 @@ runs:
         with:
             node-version: 24
             cache: 'npm'
-            cache-dependency-path: node_modules/package-lock.json
+            cache-dependency-path: '**/package-lock.json'
 
     - name: Cache dependencies ⚡
       id: cache_dependencies
