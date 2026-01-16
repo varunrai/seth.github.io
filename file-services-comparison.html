@@ -83,6 +83,18 @@
         }
         .info-card { @apply bg-white p-6 rounded-xl shadow-sm border border-slate-200; }
         .gradient-header { background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%); }
+
+        /* Navigation offset for main content */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 288px;
+            }
+        }
     </style>
     <!-- 
         HTML COMMENT: 
@@ -100,8 +112,16 @@
 
         PALETTE: "Brilliant Blues" - Deep Blue (#1E3A8A), Bright Blue (#3B82F6), Accent Amber (#F59E0B).
     -->
+    
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body class="p-4 md:p-8">
+
+<!-- Load Navigation -->
+<script src="navigation.js"></script>
+
+<div class="main-content">
 
     <header class="max-w-6xl mx-auto rounded-2xl gradient-header p-8 text-white mb-10 shadow-lg">
         <h1 class="text-3xl md:text-5xl font-black mb-2 uppercase tracking-tighter">Tiering Decoded</h1>
@@ -305,5 +325,7 @@
             }
         });
     </script>
+
+</div>
 </body>
 </html>

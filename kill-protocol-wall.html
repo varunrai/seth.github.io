@@ -79,6 +79,18 @@
         }
         .card { @apply bg-white p-6 rounded-2xl shadow-sm border border-slate-200 transition-all hover:shadow-md; }
         .protocol-pill { @apply px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider; }
+
+        /* Navigation offset for main content */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 288px;
+            }
+        }
     </style>
     <!-- 
         HTML COMMENT: 
@@ -96,8 +108,16 @@
 
         PALETTE: Brilliant Blues (#1E3A8A) and Energetic Ambers (#F59E0B).
     -->
+    
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body class="p-4 md:p-10">
+
+<!-- Load Navigation -->
+<script src="navigation.js"></script>
+
+<div class="main-content">
 
     <header class="max-w-5xl mx-auto text-center mb-16">
         <div class="inline-block bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-bold mb-4">NEW FEATURE ALERT</div>
@@ -338,5 +358,7 @@
             }
         });
     </script>
+
+</div>
 </body>
 </html>

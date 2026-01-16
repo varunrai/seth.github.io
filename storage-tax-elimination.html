@@ -75,6 +75,18 @@
         .metric-card { @apply bg-white p-6 rounded-2xl shadow-sm border border-slate-200 transition-all hover:shadow-md; }
         .tier-arrow { @apply relative flex items-center justify-center h-12 w-full; }
         .tier-arrow::after { content: '▼'; @apply absolute -bottom-2 text-slate-300; }
+
+        /* Navigation offset for main content */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 288px;
+            }
+        }
     </style>
     <!-- 
         HTML COMMENT: 
@@ -84,8 +96,16 @@
         4. Architecture and flow diagrams are built with Tailwind Grid/Flex and Unicode.
         5. Selected Palette: "Brilliant Blues" with "Energetic Ambers" for highlighting the "ONTAP Savings Zone".
     -->
+    
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body class="p-4 md:p-10">
+
+<!-- Load Navigation -->
+<script src="navigation.js"></script>
+
+<div class="main-content">
 
     <!-- HERO SECTION -->
     <header class="max-w-6xl mx-auto text-center mb-16">
@@ -347,5 +367,7 @@
             }
         });
     </script>
+
+</div>
 </body>
 </html>

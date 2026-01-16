@@ -82,6 +82,18 @@
         .arrow-r::after { content: '▶'; @apply absolute -right-1 -top-2 text-slate-300 text-xs; }
         .arrow-d::after { content: '▼'; @apply absolute -bottom-1 -left-1.5 text-slate-300 text-xs; }
         .glow-border { border: 2px solid var(--ai-glow); box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+
+        /* Navigation offset for main content */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 288px;
+            }
+        }
     </style>
     <!-- 
         HTML COMMENT: 
@@ -91,8 +103,16 @@
         4. Palette: Cyber Indigo & Amber.
         5. Label wrapping and tooltip config applied to all Chart.js instances.
     -->
+    
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body class="p-4 md:p-10">
+
+<!-- Load Navigation -->
+<script src="navigation.js"></script>
+
+<div class="main-content">
 
     <header class="max-w-6xl mx-auto mb-16">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -337,5 +357,7 @@
             }
         });
     </script>
+
+</div>
 </body>
 </html>

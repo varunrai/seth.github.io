@@ -90,6 +90,18 @@
         .flow-arrow {
             @apply flex items-center justify-center h-8 text-slate-300 font-bold;
         }
+
+        /* Navigation offset for main content */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 288px;
+            }
+        }
     </style>
     <!-- 
         INFOGRAPHIC PLAN:
@@ -100,8 +112,16 @@
            - "Unit Price Comparison" (Horizontal Bar): EBS vs EFS vs ONTAP.
         3. NO SVG / NO MERMAID: All icons are Unicode, all arrows are CSS/Text.
     -->
+    
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body class="p-4 md:p-10">
+
+<!-- Load Navigation -->
+<script src="navigation.js"></script>
+
+<div class="main-content">
 
     <!-- HERO -->
     <header class="max-w-5xl mx-auto text-center mb-16">
@@ -320,5 +340,7 @@
             }
         });
     </script>
+
+</div>
 </body>
 </html>
