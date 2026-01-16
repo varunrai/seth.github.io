@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Storage Services Comparison: Complete Guide 2026 | AWS FSxN</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Comprehensive unbiased comparison of AWS storage services: FSx ONTAP, EFS, FSx Windows, FSx Lustre, FSx OpenZFS, EBS, and S3. Discover which solution fits your workload and cost requirements.">
+    <meta name="keywords" content="AWS storage comparison, FSx ONTAP vs EFS, AWS file storage, FSx comparison, EBS vs FSx, S3 alternatives, cloud storage services, AWS storage guide">
+    <meta name="author" content="AWS FSxN">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aws-fsxn.github.io/aws-storage-services-comparison.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aws-fsxn.github.io/aws-storage-services-comparison.html">
+    <meta property="og:title" content="AWS Storage Services Comparison: Complete Guide 2026">
+    <meta property="og:description" content="Comprehensive unbiased comparison of all AWS storage services. Find the perfect solution for your workload and budget.">
+    <meta property="og:site_name" content="AWS FSxN">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://aws-fsxn.github.io/aws-storage-services-comparison.html">
+    <meta name="twitter:title" content="AWS Storage Services Comparison: Complete Guide 2026">
+    <meta name="twitter:description" content="Comprehensive unbiased comparison of all AWS storage services. Make informed storage decisions.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "AWS Storage Services Comparison: Complete Guide 2026",
+        "description": "Comprehensive unbiased comparison of AWS storage services: FSx ONTAP, EFS, FSx Windows, FSx Lustre, FSx OpenZFS, EBS, and S3. Discover which solution fits your workload and cost requirements.",
+        "author": {
+            "@type": "Organization",
+            "name": "AWS FSxN"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AWS FSxN"
+        },
+        "datePublished": "2026-01-16",
+        "dateModified": "2026-01-16",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://aws-fsxn.github.io/aws-storage-services-comparison.html"
+        },
+        "about": [
+            {
+                "@type": "Thing",
+                "name": "AWS Storage Services"
+            },
+            {
+                "@type": "Thing",
+                "name": "Cloud Storage Comparison"
+            },
+            {
+                "@type": "Thing",
+                "name": "Storage Architecture"
+            }
+        ],
+        "keywords": "AWS storage comparison, FSx ONTAP, EFS, cloud storage services"
+    }
+    </script>
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #3B82F6;
+            --accent: #F59E0B;
+            --success: #10B981;
+            --bg-canvas: #F8FAFC;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-canvas); }
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 700px; 
+            margin: auto; 
+            height: 400px; 
+            max-height: 500px; 
+        }
+        .info-card { @apply bg-white p-6 rounded-xl shadow-sm border border-slate-200; }
+        .gradient-header { background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%); }
+        .service-badge { @apply inline-block px-3 py-1 text-xs font-bold rounded-full; }
+        .badge-ontap { @apply bg-blue-100 text-blue-800; }
+        .badge-efs { @apply bg-amber-100 text-amber-800; }
+        .badge-windows { @apply bg-purple-100 text-purple-800; }
+        .badge-lustre { @apply bg-red-100 text-red-800; }
+        .badge-openzfs { @apply bg-emerald-100 text-emerald-800; }
+        .badge-ebs { @apply bg-slate-100 text-slate-800; }
+        .badge-s3 { @apply bg-orange-100 text-orange-800; }
+
+        /* Navigation offset for main content */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 288px;
+            }
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-row {
+            @apply grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border-b border-slate-100;
+        }
+
+        .star-rating {
+            color: #F59E0B;
+        }
+    </style>
+    
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body class="p-4 md:p-8">
+
+<!-- Load Navigation -->
+<script src="navigation.js"></script>
+
+<div class="main-content">
+
+    <header class="max-w-6xl mx-auto rounded-2xl gradient-header p-8 text-white mb-10 shadow-lg">
+        <h1 class="text-3xl md:text-5xl font-black mb-2 uppercase tracking-tighter">AWS Storage Services</h1>
+        <p class="text-blue-100 text-lg md:text-xl font-light">Complete Unbiased Comparison Guide 2026</p>
+    </header>
+
+    <main class="max-w-6xl mx-auto space-y-12">
+        
+        <!-- INTRO SECTION -->
+        <section class="info-card">
+            <h2 class="text-2xl font-bold mb-4 text-slate-800">Choosing the Right Storage Solution</h2>
+            <p class="text-slate-600 text-lg leading-relaxed mb-4">
+                AWS offers seven distinct storage services, each optimized for specific workloads. Understanding the trade-offs between cost, performance, protocols, and features is essential for cloud architects building efficient infrastructure.
+            </p>
+            <p class="text-slate-600 leading-relaxed">
+                This guide provides an <strong>unbiased technical comparison</strong> to help you select the optimal storage service based on your requirements. We evaluate each service across multiple dimensions: tiering capabilities, protocol support, performance characteristics, cost efficiency, and enterprise features.
+            </p>
+        </section>
+
+        <!-- OVERVIEW RADAR CHART -->
+        <section class="info-card">
+            <h2 class="text-2xl font-bold mb-6 text-slate-800">Service Capability Overview</h2>
+            <p class="text-sm text-slate-500 mb-6">This radar chart compares storage services across five key dimensions. Higher values indicate stronger capabilities in that category.</p>
+            <div class="chart-container">
+                <canvas id="overviewRadar"></canvas>
+            </div>
+        </section>
+
+        <!-- SERVICE CARDS GRID -->
+        <section>
+            <h2 class="text-3xl font-bold mb-8 text-slate-800">Storage Services Deep Dive</h2>
+            
+            <div class="comparison-grid">
+                
+                <!-- FSx ONTAP Card -->
+                <div class="info-card hover:shadow-lg transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="service-badge badge-ontap">FSx ONTAP</span>
+                        <span class="text-2xl">🎯</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">FSx for NetApp ONTAP</h3>
+                    <p class="text-sm text-slate-600 mb-4">Enterprise-grade storage with multi-protocol support and intelligent tiering at the 4KB block level.</p>
+                    
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Protocols:</span>
+                            <span class="font-semibold text-slate-700">NFS, SMB, iSCSI, S3</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Tiering:</span>
+                            <span class="font-semibold text-blue-600">4KB Block Level</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Cost Efficiency:</span>
+                            <span class="star-rating">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Enterprise Features:</span>
+                            <span class="star-rating">⭐⭐⭐⭐⭐</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs font-semibold text-slate-700 mb-2">Best For:</p>
+                        <p class="text-xs text-slate-600">Enterprise apps, Gen AI/Analytics, mixed workloads, cost optimization</p>
+                    </div>
+                </div>
+
+                <!-- EFS Card -->
+                <div class="info-card hover:shadow-lg transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="service-badge badge-efs">EFS</span>
+                        <span class="text-2xl">📁</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">Amazon EFS</h3>
+                    <p class="text-sm text-slate-600 mb-4">Serverless elastic file system with automatic scaling and file-level tiering to Infrequent Access.</p>
+                    
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Protocols:</span>
+                            <span class="font-semibold text-slate-700">NFS v3/v4.1</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Tiering:</span>
+                            <span class="font-semibold text-amber-600">File Level (IA)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Cost Efficiency:</span>
+                            <span class="star-rating">⭐⭐</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Enterprise Features:</span>
+                            <span class="star-rating">⭐</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs font-semibold text-slate-700 mb-2">Best For:</p>
+                        <p class="text-xs text-slate-600">Serverless/Lambda, Linux workloads, web applications, simple scaling</p>
+                    </div>
+                </div>
+
+                <!-- FSx Windows Card -->
+                <div class="info-card hover:shadow-lg transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="service-badge badge-windows">FSx Windows</span>
+                        <span class="text-2xl">🪟</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">FSx for Windows</h3>
+                    <p class="text-sm text-slate-600 mb-4">Fully managed Windows file system with Active Directory integration and SMB support.</p>
+                    
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Protocols:</span>
+                            <span class="font-semibold text-slate-700">SMB 2.1/3.1.1</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Tiering:</span>
+                            <span class="font-semibold text-slate-600">None</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Cost Efficiency:</span>
+                            <span class="star-rating">⭐</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Enterprise Features:</span>
+                            <span class="star-rating">⭐⭐⭐</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs font-semibold text-slate-700 mb-2">Best For:</p>
+                        <p class="text-xs text-slate-600">Windows apps, SQL Server, SharePoint, AD-integrated environments</p>
+                    </div>
+                </div>
+
+                <!-- FSx Lustre Card -->
+                <div class="info-card hover:shadow-lg transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="service-badge badge-lustre">FSx Lustre</span>
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">FSx for Lustre</h3>
+                    <p class="text-sm text-slate-600 mb-4">High-performance parallel file system optimized for HPC, ML training, and compute-intensive workloads.</p>
+                    
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Protocols:</span>
+                            <span class="font-semibold text-slate-700">POSIX/Lustre</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Tiering:</span>
+                            <span class="font-semibold text-red-600">S3 Linked</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Cost Efficiency:</span>
+                            <span class="star-rating">⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Enterprise Features:</span>
+                            <span class="star-rating">⭐</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs font-semibold text-slate-700 mb-2">Best For:</p>
+                        <p class="text-xs text-slate-600">HPC, ML training, genomics, scientific computing, parallel processing</p>
+                    </div>
+                </div>
+
+                <!-- FSx OpenZFS Card -->
+                <div class="info-card hover:shadow-lg transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="service-badge badge-openzfs">FSx OpenZFS</span>
+                        <span class="text-2xl">🔧</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">FSx for OpenZFS</h3>
+                    <p class="text-sm text-slate-600 mb-4">High-performance Linux file system with filesystem-level tiering and compression.</p>
+                    
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Protocols:</span>
+                            <span class="font-semibold text-slate-700">NFS v3/v4.x</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Tiering:</span>
+                            <span class="font-semibold text-emerald-600">Filesystem Level</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Cost Efficiency:</span>
+                            <span class="star-rating">⭐⭐⭐</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Enterprise Features:</span>
+                            <span class="star-rating">⭐⭐</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs font-semibold text-slate-700 mb-2">Best For:</p>
+                        <p class="text-xs text-slate-600">DevOps/CI-CD, containerized workloads, Linux-native applications</p>
+                    </div>
+                </div>
+
+                <!-- EBS Card -->
+                <div class="info-card hover:shadow-lg transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="service-badge badge-ebs">EBS</span>
+                        <span class="text-2xl">💾</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">Amazon EBS</h3>
+                    <p class="text-sm text-slate-600 mb-4">Block storage volumes for EC2 instances with multiple performance tiers but no automatic tiering.</p>
+                    
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Protocols:</span>
+                            <span class="font-semibold text-slate-700">Block (iSCSI-like)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Tiering:</span>
+                            <span class="font-semibold text-slate-600">None</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Cost Efficiency:</span>
+                            <span class="star-rating">⭐</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Enterprise Features:</span>
+                            <span class="star-rating">⭐⭐</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs font-semibold text-slate-700 mb-2">Best For:</p>
+                        <p class="text-xs text-slate-600">Databases, transactional workloads, EC2 boot volumes, block-level control</p>
+                    </div>
+                </div>
+
+                <!-- S3 Card -->
+                <div class="info-card hover:shadow-lg transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="service-badge badge-s3">S3</span>
+                        <span class="text-2xl">🪣</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">Amazon S3</h3>
+                    <p class="text-sm text-slate-600 mb-4">Object storage with unlimited scale, automatic tiering, and the lowest cost for cold data.</p>
+                    
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Protocols:</span>
+                            <span class="font-semibold text-slate-700">S3 API (HTTP/S)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Tiering:</span>
+                            <span class="font-semibold text-orange-600">Object Level</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Cost Efficiency:</span>
+                            <span class="star-rating">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Enterprise Features:</span>
+                            <span class="star-rating">⭐⭐</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs font-semibold text-slate-700 mb-2">Best For:</p>
+                        <p class="text-xs text-slate-600">Data lakes, backups, archives, Gen AI training data, web assets</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TIERING COMPARISON CHART -->
+        <section class="info-card">
+            <h2 class="text-2xl font-bold mb-6 text-slate-800">Tiering Granularity Comparison</h2>
+            <p class="text-sm text-slate-500 mb-6">Finer tiering granularity enables better cost optimization while maintaining performance for hot data.</p>
+            <div class="chart-container" style="height: 300px;">
+                <canvas id="tieringChart"></canvas>
+            </div>
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600">
+                <p class="text-sm text-blue-900">
+                    <strong>Key Insight:</strong> Block-level tiering (4KB in ONTAP) provides the finest granularity, enabling up to 80% cost reduction compared to non-tiering solutions while preserving SSD performance for frequently-accessed blocks.
+                </p>
+            </div>
+        </section>
+
+        <!-- DETAILED COMPARISON TABLE -->
+        <section class="info-card overflow-x-auto">
+            <h2 class="text-2xl font-bold mb-6 text-slate-800">Detailed Feature Matrix</h2>
+            <div class="min-w-[800px]">
+                <div class="grid grid-cols-8 bg-slate-100 p-3 font-bold text-xs">
+                    <div>Feature</div>
+                    <div>FSx ONTAP</div>
+                    <div>EFS</div>
+                    <div>FSx Windows</div>
+                    <div>FSx Lustre</div>
+                    <div>FSx OpenZFS</div>
+                    <div>EBS</div>
+                    <div>S3</div>
+                </div>
+                
+                <div class="grid grid-cols-8 border-b p-3 text-xs">
+                    <div class="font-semibold">Tiering Level</div>
+                    <div class="text-blue-700 font-bold">4KB Block</div>
+                    <div>File</div>
+                    <div>None</div>
+                    <div>Filesystem</div>
+                    <div>Filesystem</div>
+                    <div>None</div>
+                    <div>Object</div>
+                </div>
+                
+                <div class="grid grid-cols-8 border-b p-3 text-xs">
+                    <div class="font-semibold">NFS Support</div>
+                    <div>✅</div>
+                    <div>✅</div>
+                    <div>❌</div>
+                    <div>✅</div>
+                    <div>✅</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                </div>
+                
+                <div class="grid grid-cols-8 border-b p-3 text-xs">
+                    <div class="font-semibold">SMB Support</div>
+                    <div>✅</div>
+                    <div>❌</div>
+                    <div>✅</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                </div>
+                
+                <div class="grid grid-cols-8 border-b p-3 text-xs">
+                    <div class="font-semibold">S3 API</div>
+                    <div>✅</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>✅</div>
+                </div>
+                
+                <div class="grid grid-cols-8 border-b p-3 text-xs">
+                    <div class="font-semibold">Deduplication</div>
+                    <div>✅</div>
+                    <div>❌</div>
+                    <div>✅</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                </div>
+                
+                <div class="grid grid-cols-8 border-b p-3 text-xs">
+                    <div class="font-semibold">Compression</div>
+                    <div>✅</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>✅</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                </div>
+                
+                <div class="grid grid-cols-8 border-b p-3 text-xs">
+                    <div class="font-semibold">Snapshots</div>
+                    <div>✅ (256/vol)</div>
+                    <div>❌</div>
+                    <div>✅</div>
+                    <div>✅</div>
+                    <div>✅</div>
+                    <div>✅</div>
+                    <div>✅ (Versioning)</div>
+                </div>
+                
+                <div class="grid grid-cols-8 border-b p-3 text-xs">
+                    <div class="font-semibold">Replication</div>
+                    <div>✅ (SnapMirror)</div>
+                    <div>✅ (Basic)</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>✅ (CRR)</div>
+                </div>
+                
+                <div class="grid grid-cols-8 border-b p-3 text-xs">
+                    <div class="font-semibold">Multi-Tenant</div>
+                    <div>✅ (SVMs)</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>✅ (Buckets)</div>
+                </div>
+                
+                <div class="grid grid-cols-8 border-b p-3 text-xs">
+                    <div class="font-semibold">QoS Controls</div>
+                    <div>✅ (Per-volume)</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>❌</div>
+                    <div>✅ (io1/io2)</div>
+                    <div>❌</div>
+                </div>
+                
+                <div class="grid grid-cols-8 p-3 text-xs">
+                    <div class="font-semibold">Cost/TB (Cold)</div>
+                    <div class="text-blue-700 font-bold">$0.015</div>
+                    <div>$0.025</div>
+                    <div>$0.13+</div>
+                    <div>N/A</div>
+                    <div>~$0.10</div>
+                    <div>$0.08+</div>
+                    <div>$0.004+</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- USE CASE DECISION TREE -->
+        <section class="info-card bg-gradient-to-br from-slate-50 to-blue-50">
+            <h2 class="text-2xl font-bold mb-6 text-slate-800">Decision Guide: Which Service to Choose?</h2>
+            
+            <div class="space-y-4">
+                <div class="bg-white p-4 rounded-lg border-l-4 border-blue-600">
+                    <h4 class="font-bold text-blue-900 mb-2">✅ Choose FSx ONTAP if:</h4>
+                    <ul class="text-sm text-slate-700 space-y-1 ml-4 list-disc">
+                        <li>You need multi-protocol access (NFS, SMB, S3, iSCSI) on the same dataset</li>
+                        <li>Your data has 20%+ hot / 80%+ cold access patterns</li>
+                        <li>You require enterprise features like SnapMirror, FlexClone, or Storage VMs</li>
+                        <li>Cost optimization is critical (60-80% reduction potential)</li>
+                        <li>Gen AI/Analytics integration with zero ETL required</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border-l-4 border-amber-600">
+                    <h4 class="font-bold text-amber-900 mb-2">✅ Choose EFS if:</h4>
+                    <ul class="text-sm text-slate-700 space-y-1 ml-4 list-disc">
+                        <li>You're building serverless architectures with Lambda</li>
+                        <li>You need automatic elastic scaling without provisioning</li>
+                        <li>Linux-only NFS workloads with simple requirements</li>
+                        <li>Cost is secondary to operational simplicity</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border-l-4 border-purple-600">
+                    <h4 class="font-bold text-purple-900 mb-2">✅ Choose FSx Windows if:</h4>
+                    <ul class="text-sm text-slate-700 space-y-1 ml-4 list-disc">
+                        <li>You're standardized on Windows and SMB protocols</li>
+                        <li>Active Directory integration is required</li>
+                        <li>Running SQL Server, SharePoint, or Windows-native applications</li>
+                        <li>Data access patterns are consistently hot (no tiering needed)</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border-l-4 border-red-600">
+                    <h4 class="font-bold text-red-900 mb-2">✅ Choose FSx Lustre if:</h4>
+                    <ul class="text-sm text-slate-700 space-y-1 ml-4 list-disc">
+                        <li>You're running HPC simulations or ML model training</li>
+                        <li>You need ultra-high throughput (hundreds of GB/s)</li>
+                        <li>Workloads require parallel processing across many nodes</li>
+                        <li>Dataset originates in S3 and needs fast compute access</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border-l-4 border-emerald-600">
+                    <h4 class="font-bold text-emerald-900 mb-2">✅ Choose FSx OpenZFS if:</h4>
+                    <ul class="text-sm text-slate-700 space-y-1 ml-4 list-disc">
+                        <li>You need simpler tiering than ONTAP for Linux workloads</li>
+                        <li>DevOps/CI-CD pipelines with containerized applications</li>
+                        <li>NFS-only requirements with good performance</li>
+                        <li>Filesystem-level policy management is sufficient</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border-l-4 border-slate-600">
+                    <h4 class="font-bold text-slate-900 mb-2">✅ Choose EBS if:</h4>
+                    <ul class="text-sm text-slate-700 space-y-1 ml-4 list-disc">
+                        <li>You need block storage for databases (Oracle, PostgreSQL, MySQL)</li>
+                        <li>High-IOPS transactional workloads require low latency</li>
+                        <li>Boot volumes for EC2 instances</li>
+                        <li>Single-instance attachment model fits your architecture</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border-l-4 border-orange-600">
+                    <h4 class="font-bold text-orange-900 mb-2">✅ Choose S3 if:</h4>
+                    <ul class="text-sm text-slate-700 space-y-1 ml-4 list-disc">
+                        <li>Building data lakes or analytics platforms</li>
+                        <li>Long-term archives and compliance storage</li>
+                        <li>Backup and disaster recovery with infinite scale</li>
+                        <li>API-native access patterns (no file system semantics needed)</li>
+                        <li>Lowest cost per GB is the primary requirement</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- COST OPTIMIZATION INSIGHT -->
+        <section class="info-card bg-gradient-to-r from-blue-900 to-blue-700 text-white">
+            <h2 class="text-2xl font-bold mb-4">💡 Cost Optimization Insight</h2>
+            <p class="text-lg text-blue-100 mb-4">
+                Organizations often overspend by <strong>4.5x</strong> on storage by using single-tier solutions (EBS/EFS) for datasets where 80% of data is cold.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-white/10 backdrop-blur-sm p-5 rounded-lg">
+                    <div class="text-3xl mb-2">📊</div>
+                    <div class="text-sm font-bold mb-1">Typical Enterprise Profile</div>
+                    <div class="text-xs text-blue-200">80% cold data, 15% warm, 5% hot</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-5 rounded-lg">
+                    <div class="text-3xl mb-2">💰</div>
+                    <div class="text-sm font-bold mb-1">FSx ONTAP Savings</div>
+                    <div class="text-xs text-blue-200">60-80% TCO reduction with intelligent tiering</div>
+                </div>
+            </div>
+            <p class="text-sm text-blue-200 mt-6 italic">
+                Block-level tiering at 4KB granularity maximizes cost efficiency while preserving performance for hot data.
+            </p>
+        </section>
+
+        <!-- PERFORMANCE COMPARISON -->
+        <section class="info-card">
+            <h2 class="text-2xl font-bold mb-6 text-slate-800">Performance & Latency Comparison</h2>
+            <p class="text-sm text-slate-500 mb-6">Approximate latency characteristics for each storage tier. Lower is better for real-time applications.</p>
+            <div class="chart-container" style="height: 350px;">
+                <canvas id="performanceChart"></canvas>
+            </div>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="p-3 bg-green-50 rounded border-l-4 border-green-600">
+                    <div class="font-bold text-green-900">Low Latency (< 1ms)</div>
+                    <div class="text-green-700">EBS io2, FSx ONTAP SSD, FSx Lustre Cache</div>
+                </div>
+                <div class="p-3 bg-yellow-50 rounded border-l-4 border-yellow-600">
+                    <div class="font-bold text-yellow-900">Medium Latency (1-30ms)</div>
+                    <div class="text-yellow-700">EFS, FSx ONTAP Capacity Pool, S3 Standard</div>
+                </div>
+                <div class="p-3 bg-red-50 rounded border-l-4 border-red-600">
+                    <div class="font-bold text-red-900">High Latency (> 1s)</div>
+                    <div class="text-red-700">S3 Glacier, S3 Deep Archive</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-6xl mx-auto py-12 text-center text-slate-400 text-xs">
+        <p class="mb-2">Last Updated: January 2026</p>
+        <p>This guide provides an unbiased technical comparison of AWS storage services based on publicly available documentation and architecture best practices.</p>
+    </footer>
+
+    <script>
+        // Label Wrapping Logic
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = "";
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + " ";
+                } else {
+                    currentLine += word + " ";
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        // Shared Tooltip Config
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    return Array.isArray(label) ? label.join(' ') : label;
+                }
+            }
+        };
+
+        // --- CHART 1: OVERVIEW RADAR ---
+        const radarCtx = document.getElementById('overviewRadar').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    wrapLabel('Cost Efficiency'),
+                    wrapLabel('Multi-Protocol'),
+                    wrapLabel('Enterprise Features'),
+                    wrapLabel('Performance'),
+                    wrapLabel('Scalability')
+                ],
+                datasets: [
+                    {
+                        label: 'FSx ONTAP',
+                        data: [5, 5, 5, 5, 5],
+                        backgroundColor: 'rgba(30, 58, 138, 0.2)',
+                        borderColor: '#1E3A8A',
+                        pointBackgroundColor: '#1E3A8A'
+                    },
+                    {
+                        label: 'EFS',
+                        data: [2, 1, 1, 3, 4],
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                        borderColor: '#F59E0B',
+                        pointBackgroundColor: '#F59E0B'
+                    },
+                    {
+                        label: 'FSx Lustre',
+                        data: [4, 1, 1, 5, 5],
+                        backgroundColor: 'rgba(220, 38, 38, 0.2)',
+                        borderColor: '#DC2626',
+                        pointBackgroundColor: '#DC2626'
+                    },
+                    {
+                        label: 'S3',
+                        data: [5, 1, 2, 3, 5],
+                        backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                        borderColor: '#F97316',
+                        pointBackgroundColor: '#F97316'
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: { tooltip: tooltipConfig },
+                scales: {
+                    r: { min: 0, max: 5, ticks: { display: false } }
+                }
+            }
+        });
+
+        // --- CHART 2: TIERING GRANULARITY ---
+        const tieringCtx = document.getElementById('tieringChart').getContext('2d');
+        new Chart(tieringCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('FSx ONTAP'),
+                    wrapLabel('S3'),
+                    wrapLabel('EFS'),
+                    wrapLabel('OpenZFS'),
+                    wrapLabel('Lustre'),
+                    wrapLabel('FSx Windows'),
+                    wrapLabel('EBS')
+                ],
+                datasets: [{
+                    label: 'Tiering Unit Size (KB, log scale)',
+                    data: [4, 1024, 10240, 102400, null, null, null], // 4KB, 1MB (object), 10MB (file), 100MB (filesystem)
+                    backgroundColor: [
+                        '#1E3A8A',
+                        '#F97316',
+                        '#F59E0B',
+                        '#10B981',
+                        '#94A3B8',
+                        '#94A3B8',
+                        '#94A3B8'
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                if (context.parsed.x === null) return 'No Tiering';
+                                return 'Unit: ' + context.parsed.x + ' KB';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'logarithmic',
+                        title: { display: true, text: 'Tiering Unit Size (KB, log scale) - Lower = Finer Granularity' }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 3: PERFORMANCE/LATENCY ---
+        const perfCtx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(perfCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('EBS io2'),
+                    wrapLabel('FSx ONTAP SSD'),
+                    wrapLabel('FSx Lustre'),
+                    wrapLabel('EFS Standard'),
+                    wrapLabel('EFS IA'),
+                    wrapLabel('FSx ONTAP Cap Pool'),
+                    wrapLabel('S3 Standard'),
+                    wrapLabel('S3 Glacier')
+                ],
+                datasets: [{
+                    label: 'Latency (ms, log scale)',
+                    data: [0.5, 0.8, 1, 1.5, 15, 25, 50, 4000],
+                    backgroundColor: [
+                        '#10B981',
+                        '#1E3A8A',
+                        '#DC2626',
+                        '#F59E0B',
+                        '#F59E0B',
+                        '#1E3A8A',
+                        '#F97316',
+                        '#94A3B8'
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    x: {
+                        type: 'logarithmic',
+                        title: { display: true, text: 'Milliseconds (Log Scale) - Lower = Better' }
+                    }
+                }
+            }
+        });
+    </script>
+
+</div>
+</body>
+</html>

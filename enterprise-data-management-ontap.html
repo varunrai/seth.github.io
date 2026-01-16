@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Data Management: NetApp ONTAP Features | AWS FSxN</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover FSx for NetApp ONTAP's superior enterprise data management features: SnapMirror, FlexClone, Storage QoS, Multi-tenancy, and advanced efficiency that set it apart from other AWS storage.">
+    <meta name="keywords" content="NetApp ONTAP, enterprise storage, SnapMirror, FlexClone, Storage QoS, data management, AWS FSx ONTAP, enterprise features, storage efficiency, data protection">
+    <meta name="author" content="AWS FSxN">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aws-fsxn.github.io/enterprise-data-management-ontap.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aws-fsxn.github.io/enterprise-data-management-ontap.html">
+    <meta property="og:title" content="Enterprise Data Management: NetApp ONTAP Features">
+    <meta property="og:description" content="Explore the enterprise features that make FSx for NetApp ONTAP superior for data management: SnapMirror, FlexClone, QoS, and more.">
+    <meta property="og:site_name" content="AWS FSxN">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://aws-fsxn.github.io/enterprise-data-management-ontap.html">
+    <meta name="twitter:title" content="Enterprise Data Management: NetApp ONTAP Features">
+    <meta name="twitter:description" content="Discover the advanced enterprise features that differentiate FSx ONTAP from other cloud storage solutions.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Enterprise Data Management: NetApp ONTAP Features",
+        "description": "Discover FSx for NetApp ONTAP's superior enterprise data management features: SnapMirror, FlexClone, Storage QoS, Multi-tenancy, and advanced efficiency that set it apart from other AWS storage.",
+        "author": {
+            "@type": "Organization",
+            "name": "AWS FSxN"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AWS FSxN"
+        },
+        "datePublished": "2026-01-16",
+        "dateModified": "2026-01-16",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://aws-fsxn.github.io/enterprise-data-management-ontap.html"
+        },
+        "about": [
+            {
+                "@type": "Thing",
+                "name": "Enterprise Data Management"
+            },
+            {
+                "@type": "Thing",
+                "name": "NetApp ONTAP"
+            },
+            {
+                "@type": "Thing",
+                "name": "Cloud Storage Features"
+            }
+        ],
+        "keywords": "NetApp ONTAP, enterprise storage, SnapMirror, FlexClone, data management"
+    }
+    </script>
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #3B82F6;
+            --accent: #F59E0B;
+            --success: #10B981;
+            --bg-canvas: #F8FAFC;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-canvas); }
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 650px; 
+            margin: auto; 
+            height: 350px; 
+        }
+        .info-card { @apply bg-white p-6 rounded-xl shadow-sm border border-slate-200; }
+        .gradient-header { background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%); }
+        .feature-badge { 
+            @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold;
+        }
+        .badge-critical { @apply bg-red-100 text-red-800 border border-red-300; }
+        .badge-high { @apply bg-blue-100 text-blue-800 border border-blue-300; }
+        .badge-medium { @apply bg-green-100 text-green-800 border border-green-300; }
+        .badge-unique { @apply bg-purple-100 text-purple-800 border border-purple-300; }
+
+        /* Navigation offset for main content */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 288px;
+            }
+        }
+
+        .feature-card {
+            @apply bg-white p-6 rounded-xl shadow-md border-2 border-transparent transition-all hover:border-blue-500 hover:shadow-xl;
+        }
+
+        .timeline-item {
+            @apply relative pl-8 pb-8 border-l-2 border-blue-300;
+        }
+
+        .timeline-item::before {
+            content: '';
+            @apply absolute left-0 top-0 w-4 h-4 bg-blue-600 rounded-full transform -translate-x-2;
+        }
+
+        .comparison-highlight {
+            @apply bg-gradient-to-r from-blue-50 to-emerald-50 p-4 rounded-lg border-l-4 border-blue-600;
+        }
+    </style>
+    
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body class="p-4 md:p-8">
+
+<!-- Load Navigation -->
+<script src="navigation.js"></script>
+
+<div class="main-content">
+
+    <header class="max-w-6xl mx-auto rounded-2xl gradient-header p-8 text-white mb-10 shadow-lg">
+        <span class="inline-block px-3 py-1 mb-4 text-xs font-black tracking-widest bg-white/20 rounded-full">
+            ENTERPRISE GRADE
+        </span>
+        <h1 class="text-3xl md:text-5xl font-black mb-2 uppercase tracking-tighter">NetApp ONTAP</h1>
+        <p class="text-blue-100 text-lg md:text-xl font-light">Advanced Enterprise Data Management in the Cloud</p>
+    </header>
+
+    <main class="max-w-6xl mx-auto space-y-12">
+        
+        <!-- INTRO SECTION -->
+        <section class="info-card">
+            <h2 class="text-2xl font-bold mb-4 text-slate-800">Beyond Basic Storage</h2>
+            <p class="text-slate-600 text-lg leading-relaxed mb-4">
+                While most cloud storage services provide basic file or block storage, <strong>FSx for NetApp ONTAP</strong> delivers a comprehensive <em>data management platform</em> with enterprise-grade features honed over 30+ years of storage innovation.
+            </p>
+            <p class="text-slate-600 leading-relaxed">
+                This page explores the advanced capabilities that set ONTAP apart from alternatives like EFS, FSx Windows, OpenZFS, EBS, and S3. These features enable mission-critical workloads, sophisticated data protection strategies, and significant operational efficiencies.
+            </p>
+        </section>
+
+        <!-- UNIQUE VALUE PROPOSITION -->
+        <section class="info-card bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200">
+            <h2 class="text-2xl font-bold mb-6 text-slate-800">What Makes ONTAP Different?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-5 rounded-lg shadow-sm">
+                    <div class="text-3xl mb-3">🎯</div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800">Multi-Protocol Convergence</h3>
+                    <p class="text-sm text-slate-600">Concurrent access to the same data via NFS, SMB, iSCSI, and S3 API—eliminating data silos and ETL processes.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-sm">
+                    <div class="text-3xl mb-3">⚡</div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800">4KB Block-Level Intelligence</h3>
+                    <p class="text-sm text-slate-600">Granular tiering, deduplication, and compression at the finest level—preserving efficiency across hot and cold tiers.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-sm">
+                    <div class="text-3xl mb-3">🔒</div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800">Enterprise Data Protection</h3>
+                    <p class="text-sm text-slate-600">SnapMirror replication, 256 snapshots per volume, FlexClone for instant zero-copy clones—far beyond basic backups.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-sm">
+                    <div class="text-3xl mb-3">🏗️</div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800">Multi-Tenant Architecture</h3>
+                    <p class="text-sm text-slate-600">Storage Virtual Machines (SVMs) provide secure isolation for different teams, applications, or customers on shared infrastructure.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ENTERPRISE FEATURES DEEP DIVE -->
+        <section>
+            <h2 class="text-3xl font-bold mb-8 text-slate-800">Enterprise Features Deep Dive</h2>
+            
+            <div class="space-y-8">
+                
+                <!-- Feature 1: SnapMirror -->
+                <div class="feature-card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="feature-badge badge-critical mb-2">MISSION CRITICAL</span>
+                            <h3 class="text-2xl font-bold text-slate-800">SnapMirror: Block-Level Replication</h3>
+                        </div>
+                        <div class="text-4xl">🔄</div>
+                    </div>
+                    
+                    <p class="text-slate-600 mb-4">
+                        SnapMirror provides <strong>block-level incremental replication</strong> for disaster recovery and data distribution. Only changed 4KB blocks are transferred, minimizing bandwidth and enabling RPO as low as seconds.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <div class="text-xs font-bold text-slate-500 mb-1">RPO</div>
+                            <div class="text-2xl font-black text-blue-600">Seconds</div>
+                            <div class="text-xs text-slate-600">Recovery Point Objective</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <div class="text-xs font-bold text-slate-500 mb-1">Bandwidth</div>
+                            <div class="text-2xl font-black text-emerald-600">Minimal</div>
+                            <div class="text-xs text-slate-600">Only changed blocks</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <div class="text-xs font-bold text-slate-500 mb-1">Use Cases</div>
+                            <div class="text-2xl font-black text-slate-600">DR + Dist</div>
+                            <div class="text-xs text-slate-600">Disaster recovery & distribution</div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-highlight">
+                        <p class="text-sm font-semibold text-slate-800 mb-2">📊 Comparison:</p>
+                        <ul class="text-sm text-slate-700 space-y-1">
+                            <li><strong>EFS:</strong> Basic replication (entire file system, no block-level efficiency)</li>
+                            <li><strong>FSx Windows:</strong> No native replication</li>
+                            <li><strong>OpenZFS:</strong> No native replication</li>
+                            <li><strong>EBS:</strong> Manual snapshots only</li>
+                            <li><strong>ONTAP SnapMirror:</strong> Continuous block-level incremental replication with minimal RPO ✅</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 2: FlexClone -->
+                <div class="feature-card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="feature-badge badge-high mb-2">DEV/TEST ACCELERATION</span>
+                            <h3 class="text-2xl font-bold text-slate-800">FlexClone: Zero-Copy Instant Clones</h3>
+                        </div>
+                        <div class="text-4xl">⚡</div>
+                    </div>
+                    
+                    <p class="text-slate-600 mb-4">
+                        FlexClone creates <strong>writable, space-efficient clones</strong> of volumes or LUNs in seconds—regardless of dataset size. Perfect for dev/test environments, CI/CD pipelines, and rapid experimentation.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <h4 class="font-bold text-sm mb-3 text-slate-700">Traditional Cloning</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center text-sm">
+                                    <span class="text-red-500 mr-2">❌</span>
+                                    <span class="text-slate-600">Full data copy required (hours for TB datasets)</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <span class="text-red-500 mr-2">❌</span>
+                                    <span class="text-slate-600">Doubles storage consumption</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <span class="text-red-500 mr-2">❌</span>
+                                    <span class="text-slate-600">High I/O and network overhead</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm mb-3 text-slate-700">FlexClone</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center text-sm">
+                                    <span class="text-green-500 mr-2">✅</span>
+                                    <span class="text-slate-600">Instant creation (seconds, any size)</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <span class="text-green-500 mr-2">✅</span>
+                                    <span class="text-slate-600">Near-zero storage overhead (metadata only)</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <span class="text-green-500 mr-2">✅</span>
+                                    <span class="text-slate-600">No I/O penalty—fully writable</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-highlight">
+                        <p class="text-sm font-semibold text-slate-800 mb-2">📊 Comparison:</p>
+                        <ul class="text-sm text-slate-700 space-y-1">
+                            <li><strong>EFS/FSx Windows/OpenZFS:</strong> No instant cloning (requires full copy)</li>
+                            <li><strong>EBS:</strong> Snapshot-based copy (time + storage cost)</li>
+                            <li><strong>ONTAP FlexClone:</strong> Instant zero-copy writable clones ✅</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Storage QoS -->
+                <div class="feature-card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="feature-badge badge-high mb-2">PERFORMANCE CONTROL</span>
+                            <h3 class="text-2xl font-bold text-slate-800">Storage QoS: Granular Performance Management</h3>
+                        </div>
+                        <div class="text-4xl">🎛️</div>
+                    </div>
+                    
+                    <p class="text-slate-600 mb-4">
+                        Storage QoS enables <strong>per-volume or per-file IOPS and throughput limits</strong>, preventing noisy neighbor issues and guaranteeing SLAs for critical workloads.
+                    </p>
+                    
+                    <div class="bg-slate-50 p-5 rounded-lg mb-4">
+                        <h4 class="font-bold text-sm mb-3 text-slate-700">QoS Policy Types</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <div class="font-semibold text-blue-700 mb-1">Max Throughput (Ceiling)</div>
+                                <div class="text-slate-600">Prevent one workload from consuming all resources</div>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-emerald-700 mb-1">Min Throughput (Floor)</div>
+                                <div class="text-slate-600">Guarantee performance for critical applications</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-highlight">
+                        <p class="text-sm font-semibold text-slate-800 mb-2">📊 Comparison:</p>
+                        <ul class="text-sm text-slate-700 space-y-1">
+                            <li><strong>EFS/FSx Windows/OpenZFS:</strong> No per-volume QoS controls</li>
+                            <li><strong>EBS:</strong> QoS via volume type selection only (io1/io2 provisioned IOPS)</li>
+                            <li><strong>ONTAP:</strong> Granular per-volume/file IOPS and throughput policies ✅</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Storage Virtual Machines (SVMs) -->
+                <div class="feature-card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="feature-badge badge-medium mb-2">MULTI-TENANCY</span>
+                            <h3 class="text-2xl font-bold text-slate-800">Storage Virtual Machines (SVMs)</h3>
+                        </div>
+                        <div class="text-4xl">🏢</div>
+                    </div>
+                    
+                    <p class="text-slate-600 mb-4">
+                        SVMs provide <strong>secure multi-tenant isolation</strong> on shared infrastructure. Each SVM has its own namespace, security context, and protocol endpoints—ideal for service providers or large enterprises.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg text-center">
+                            <div class="text-2xl font-black text-blue-700 mb-1">Isolated</div>
+                            <div class="text-xs text-slate-600">Namespace per tenant</div>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-lg text-center">
+                            <div class="text-2xl font-black text-emerald-700 mb-1">Secure</div>
+                            <div class="text-xs text-slate-600">Separate security contexts</div>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg text-center">
+                            <div class="text-2xl font-black text-purple-700 mb-1">Efficient</div>
+                            <div class="text-xs text-slate-600">Shared infrastructure</div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-highlight">
+                        <p class="text-sm font-semibold text-slate-800 mb-2">📊 Comparison:</p>
+                        <ul class="text-sm text-slate-700 space-y-1">
+                            <li><strong>EFS/FSx Windows/OpenZFS/EBS:</strong> No native multi-tenancy (require separate file systems)</li>
+                            <li><strong>S3:</strong> Bucket-level isolation (not true multi-tenancy)</li>
+                            <li><strong>ONTAP SVMs:</strong> Comprehensive multi-tenant isolation with shared infrastructure ✅</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 5: Advanced Snapshots -->
+                <div class="feature-card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="feature-badge badge-critical mb-2">DATA PROTECTION</span>
+                            <h3 class="text-2xl font-bold text-slate-800">Advanced Snapshot Technology</h3>
+                        </div>
+                        <div class="text-4xl">📸</div>
+                    </div>
+                    
+                    <p class="text-slate-600 mb-4">
+                        ONTAP snapshots are <strong>space-efficient, instant, point-in-time copies</strong> using redirect-on-write technology. Up to 256 snapshots per volume enable granular recovery points.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-sm mb-2 text-slate-700">Snapshot Characteristics</h4>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Instant creation (no performance impact)</li>
+                                <li>• Space-efficient (only stores deltas)</li>
+                                <li>• 256 snapshots per volume</li>
+                                <li>• File/folder-level restore via .snapshot directory</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-sm mb-2 text-slate-700">Use Cases</h4>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Ransomware recovery</li>
+                                <li>• Operational recovery (accidental deletion)</li>
+                                <li>• Test/dev rollback</li>
+                                <li>• Compliance retention</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-highlight">
+                        <p class="text-sm font-semibold text-slate-800 mb-2">📊 Comparison:</p>
+                        <ul class="text-sm text-slate-700 space-y-1">
+                            <li><strong>EFS:</strong> No snapshot capability</li>
+                            <li><strong>FSx Windows:</strong> Shadow copies (limited retention)</li>
+                            <li><strong>OpenZFS:</strong> ZFS snapshots (limited management)</li>
+                            <li><strong>EBS:</strong> Manual snapshots (require full copy, slower restore)</li>
+                            <li><strong>ONTAP:</strong> 256 instant space-efficient snapshots per volume with granular restore ✅</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 6: Storage Efficiency -->
+                <div class="feature-card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="feature-badge badge-unique mb-2">COST OPTIMIZATION</span>
+                            <h3 class="text-2xl font-bold text-slate-800">Unified Storage Efficiency</h3>
+                        </div>
+                        <div class="text-4xl">💎</div>
+                    </div>
+                    
+                    <p class="text-slate-600 mb-4">
+                        ONTAP combines <strong>inline deduplication, compression, and compaction</strong> at the 4KB block level—reducing storage consumption by 3:1 average (up to 10:1 for VDI/VMs) before tiering.
+                    </p>
+                    
+                    <div class="chart-container" style="height: 280px;">
+                        <canvas id="efficiencyChart"></canvas>
+                    </div>
+                    
+                    <div class="comparison-highlight mt-6">
+                        <p class="text-sm font-semibold text-slate-800 mb-2">📊 Comparison:</p>
+                        <ul class="text-sm text-slate-700 space-y-1">
+                            <li><strong>EFS:</strong> No efficiency features</li>
+                            <li><strong>FSx Windows:</strong> Deduplication only (no compression)</li>
+                            <li><strong>OpenZFS:</strong> Compression only (no deduplication)</li>
+                            <li><strong>EBS/S3:</strong> No efficiency features</li>
+                            <li><strong>ONTAP:</strong> Deduplication + Compression + Compaction + Tiering ✅</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FEATURE AVAILABILITY MATRIX -->
+        <section class="info-card">
+            <h2 class="text-2xl font-bold mb-6 text-slate-800">Enterprise Feature Availability Matrix</h2>
+            <div class="overflow-x-auto">
+                <div class="min-w-[700px]">
+                    <div class="grid grid-cols-8 bg-slate-100 p-3 font-bold text-xs">
+                        <div>Feature</div>
+                        <div class="text-center">FSx ONTAP</div>
+                        <div class="text-center">EFS</div>
+                        <div class="text-center">FSx Windows</div>
+                        <div class="text-center">FSx Lustre</div>
+                        <div class="text-center">FSx OpenZFS</div>
+                        <div class="text-center">EBS</div>
+                        <div class="text-center">S3</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-8 border-b p-3 text-xs">
+                        <div class="font-semibold">SnapMirror Replication</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">⚠️</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">✅</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-8 border-b p-3 text-xs">
+                        <div class="font-semibold">FlexClone (Instant Clone)</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-8 border-b p-3 text-xs">
+                        <div class="font-semibold">Storage QoS (Per-Volume)</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">⚠️</div>
+                        <div class="text-center">❌</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-8 border-b p-3 text-xs">
+                        <div class="font-semibold">Multi-Tenancy (SVMs)</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">⚠️</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-8 border-b p-3 text-xs">
+                        <div class="font-semibold">Snapshots (256/volume)</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">⚠️</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">⚠️</div>
+                        <div class="text-center">✅</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-8 border-b p-3 text-xs">
+                        <div class="font-semibold">Inline Deduplication</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-8 border-b p-3 text-xs">
+                        <div class="font-semibold">Inline Compression</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-8 border-b p-3 text-xs">
+                        <div class="font-semibold">4KB Block Tiering</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-8 p-3 text-xs">
+                        <div class="font-semibold">Multi-Protocol (NFS/SMB/S3)</div>
+                        <div class="text-center">✅</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                        <div class="text-center">❌</div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
+                <div><span class="font-bold">✅</span> = Full Support</div>
+                <div><span class="font-bold">⚠️</span> = Limited/Partial</div>
+                <div><span class="font-bold">❌</span> = Not Available</div>
+            </div>
+        </section>
+
+        <!-- REAL-WORLD IMPACT -->
+        <section class="info-card bg-gradient-to-r from-slate-900 to-blue-900 text-white">
+            <h2 class="text-2xl font-bold mb-6">Real-World Impact</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold text-lg mb-3 text-blue-200">Financial Services</h3>
+                    <p class="text-sm text-slate-200 mb-3">
+                        A major investment bank uses FSx ONTAP for trading applications requiring sub-millisecond latency and DR capability.
+                    </p>
+                    <ul class="text-sm text-blue-100 space-y-1">
+                        <li>✓ SnapMirror: RPO < 5 seconds to DR site</li>
+                        <li>✓ FlexClone: Instant test environments</li>
+                        <li>✓ Storage efficiency: 4.2:1 reduction</li>
+                        <li>✓ Result: 70% TCO reduction vs. EBS</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-3 text-blue-200">Healthcare/Life Sciences</h3>
+                    <p class="text-sm text-slate-200 mb-3">
+                        A genomics research institute uses ONTAP for petabyte-scale datasets with S3 API for analytics.
+                    </p>
+                    <ul class="text-sm text-blue-100 space-y-1">
+                        <li>✓ Multi-protocol: NFS for analysis, S3 for ML</li>
+                        <li>✓ Tiering: 85% data in capacity pool</li>
+                        <li>✓ FlexCache: Global edge distribution</li>
+                        <li>✓ Result: Zero-ETL Gen AI pipeline</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-3 text-blue-200">Media & Entertainment</h3>
+                    <p class="text-sm text-slate-200 mb-3">
+                        A major studio uses FSx ONTAP for high-resolution video editing and rendering workflows.
+                    </p>
+                    <ul class="text-sm text-blue-100 space-y-1">
+                        <li>✓ Scale-out: 36 GB/s aggregate throughput</li>
+                        <li>✓ Storage QoS: Guaranteed editor performance</li>
+                        <li>✓ Snapshots: Instant project rollback</li>
+                        <li>✓ Result: 50% faster project delivery</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-3 text-blue-200">SaaS Provider</h3>
+                    <p class="text-sm text-slate-200 mb-3">
+                        A B2B SaaS company serves 500+ customers from shared FSx ONTAP infrastructure.
+                    </p>
+                    <ul class="text-sm text-blue-100 space-y-1">
+                        <li>✓ SVMs: Secure tenant isolation</li>
+                        <li>✓ Storage QoS: Fair resource sharing</li>
+                        <li>✓ SnapMirror: Per-tenant backups</li>
+                        <li>✓ Result: 80% infrastructure cost savings</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUMMARY -->
+        <section class="info-card border-2 border-blue-300 bg-gradient-to-br from-white to-blue-50">
+            <h2 class="text-2xl font-bold mb-4 text-slate-800">The ONTAP Advantage</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+                While other AWS storage services provide basic file or block storage capabilities, <strong>FSx for NetApp ONTAP</strong> delivers a comprehensive enterprise data management platform with:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div class="flex items-start">
+                    <span class="text-blue-600 mr-2 text-lg">✓</span>
+                    <span class="text-slate-700">30+ years of storage innovation refined for cloud</span>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-blue-600 mr-2 text-lg">✓</span>
+                    <span class="text-slate-700">Advanced data protection (SnapMirror, 256 snapshots)</span>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-blue-600 mr-2 text-lg">✓</span>
+                    <span class="text-slate-700">Operational efficiency (FlexClone, QoS, SVMs)</span>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-blue-600 mr-2 text-lg">✓</span>
+                    <span class="text-slate-700">Cost optimization (4KB tiering, dedup, compression)</span>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-blue-600 mr-2 text-lg">✓</span>
+                    <span class="text-slate-700">Protocol convergence (NFS, SMB, iSCSI, S3)</span>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-blue-600 mr-2 text-lg">✓</span>
+                    <span class="text-slate-700">Enterprise-grade reliability and performance</span>
+                </div>
+            </div>
+            <p class="text-slate-600 text-sm mt-6 italic">
+                For mission-critical workloads requiring advanced data management, FSx for NetApp ONTAP provides capabilities unmatched by simpler storage services.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="max-w-6xl mx-auto py-12 text-center text-slate-400 text-xs">
+        <p class="mb-2">Last Updated: January 2026</p>
+        <p>FSx for NetApp ONTAP combines 30+ years of enterprise storage innovation with cloud-native AWS integration.</p>
+    </footer>
+
+    <script>
+        // Storage Efficiency Chart
+        const effCtx = document.getElementById('efficiencyChart').getContext('2d');
+        new Chart(effCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Raw Data', 'After Dedup', 'After Compression', 'After Tiering'],
+                datasets: [{
+                    label: 'Storage Consumed (TB)',
+                    data: [100, 50, 33, 15],
+                    backgroundColor: [
+                        '#94A3B8',
+                        '#3B82F6',
+                        '#10B981',
+                        '#F59E0B'
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const reduction = context.dataIndex === 0 ? '0%' : 
+                                    Math.round((1 - context.parsed.y / 100) * 100) + '%';
+                                return context.parsed.y + ' TB (' + reduction + ' reduction)';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Storage Consumed (TB)' }
+                    }
+                }
+            }
+        });
+    </script>
+
+</div>
+</body>
+</html>

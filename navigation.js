@@ -45,6 +45,18 @@ const navigationConfig = {
             description: "EFS, FSxZ vs FSx"
         },
         {
+            title: "Storage Services Guide",
+            url: "aws-storage-services-comparison.html",
+            icon: "🗺️",
+            description: "Complete AWS Comparison"
+        },
+        {
+            title: "Enterprise Data Management",
+            url: "enterprise-data-management-ontap.html",
+            icon: "🏢",
+            description: "ONTAP Advanced Features"
+        },
+        {
             title: "Scale-Out Performance",
             url: "scale-out-performance.html",
             icon: "⚡",
