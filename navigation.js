@@ -61,6 +61,12 @@ const navigationConfig = {
             url: "scale-out-performance.html",
             icon: "⚡",
             description: "Ultimate Performance"
+        },
+        {
+            title: "S3 API Tax Elimination",
+            url: "s3-api-tax.html",
+            icon: "💡",
+            description: "4MB Aggregation Engine"
         }
     ]
 };
